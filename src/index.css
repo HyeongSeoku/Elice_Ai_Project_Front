@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  @apply w-full h-full flex flex-col justify-center items-center mx-auto p-5;
+}
