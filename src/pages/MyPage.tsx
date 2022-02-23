@@ -13,7 +13,7 @@ interface Props {
   }[];
 }
 
-const LoggedInHome = () => {
+const MyPage = () => {
   //데이터 통신을 통해 받아올 데이터
   const arr = [
     {
@@ -126,4 +126,4 @@ const LoggedInHome = () => {
   );
 };
 
-export default LoggedInHome;
+export default MyPage;
