@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import SearchBar from "../components/SearchBar";
 import VideoCard from "../components/VideoCard";
@@ -108,7 +109,9 @@ const LoggedInHome = () => {
         style={{ height: "15%" }}
       >
         <div className="w-1/4">
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
         </div>
       </div>
       <div
