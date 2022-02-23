@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("./styles/LoggedInHome.css");
+@import url("./styles/MyPage.css");
 
 #root {
   width: 100vw;

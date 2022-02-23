@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.videoCardContainer {
+  @apply w-80 h-64 m-2 flex flex-col bg-slate-200;
+}
+
+.videoContentsRowContainer {
+  @apply flex flex-row justify-start space-x-2 mt-1 box-border p-1 flex-grow;
+}
