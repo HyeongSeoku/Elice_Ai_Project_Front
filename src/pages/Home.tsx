@@ -13,10 +13,6 @@ const Home = () => {
     setIsModalOpen((current) => !current);
   };
 
-  useEffect(() => {
-    console.log(isModalOpen);
-  }, [isModalOpen]);
-
   return (
     <div className="container">
       <HeaderMenu isModalOpen={isModalOpen} onModalBtnClick={onModalBtnClick} />
