@@ -1,6 +1,17 @@
-const VideoCard = () => {
+interface Props {
+  VideoObj: {
+    videoUrl: string;
+    thumbnail: string;
+    owner: string;
+    title: string;
+    hashTag: string[];
+  };
+}
+
+const VideoCard = ({ VideoObj }: Props) => {
+  console.log(VideoObj);
   return (
-    <div className="videoCardContainer ">
+    <div className="videoCardContainer hover:scale-105 hover:shadow-2xl">
       <img
         className="w-full"
         src={require("../img/IMG_2347.jpg")}
@@ -13,8 +24,9 @@ const VideoCard = () => {
         </div>
         <div className="font-light ml-7 flex-grow">만든 사람</div>
         <div className="videoContentsRowContainer">
-          <div className="mr-7">10만회</div>
-          <div className="text-lg font-light"></div>
+          {VideoObj.hashTag.map((item) => (
+            <div className="text-lg font-light">#{item}</div>
+          ))}
         </div>
       </div>
     </div>
