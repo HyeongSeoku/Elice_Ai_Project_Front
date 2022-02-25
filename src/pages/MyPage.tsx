@@ -3,16 +3,6 @@ import Logo from "../components/Logo";
 import SearchBar from "../components/SearchBar";
 import VideoCard from "../components/VideoCard";
 
-interface Props {
-  savedVideo: {
-    videoUrl: string;
-    thumbnail: string;
-    owner: string;
-    title: string;
-    hashtag: string[];
-  }[];
-}
-
 const MyPage = () => {
   //데이터 통신을 통해 받아올 데이터
   const arr = [
@@ -119,7 +109,7 @@ const MyPage = () => {
         style={{ height: "70%" }}
       >
         {arr.map((item) => (
-          <VideoCard VideoObj={item} />
+          <VideoCard videoObj={item} />
         ))}
       </div>
     </div>
