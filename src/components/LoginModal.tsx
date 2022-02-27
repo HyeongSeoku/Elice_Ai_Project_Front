@@ -19,11 +19,6 @@ const LoginModal = ({
   isLoggedIn,
   onChangeLoginState,
 }: Props) => {
-  //로그인 테스트용 더미 아이디 & 패스워드
-  const tmpId = "test";
-  const tmpPwd = "gudtjr123";
-  const navigate = useNavigate();
-
   const [id, setId] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
 
