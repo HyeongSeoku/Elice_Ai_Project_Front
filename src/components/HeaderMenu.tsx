@@ -19,9 +19,11 @@ const HeaderMenu = ({ isModalOpen, onModalBtnClick }: Props) => {
       >
         로그인
       </button>
-      <button className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400">
-        회원가입
-      </button>
+      <Link to="regist">
+        <button className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400">
+          회원가입
+        </button>
+      </Link>
     </header>
   );
 };
