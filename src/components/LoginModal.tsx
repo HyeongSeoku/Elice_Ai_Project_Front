@@ -8,9 +8,17 @@ import commonApi from "../apis/commonApi";
 interface Props {
   isModalOpen: boolean;
   onModalBtnClick: () => void;
+
+  isLoggedIn: boolean;
+  onChangeLoginState: () => void;
 }
 
-const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
+const LoginModal = ({
+  isModalOpen,
+  onModalBtnClick,
+  isLoggedIn,
+  onChangeLoginState,
+}: Props) => {
   //로그인 테스트용 더미 아이디 & 패스워드
   const tmpId = "test";
   const tmpPwd = "gudtjr123";
@@ -28,15 +36,22 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
   };
 
   const onSubmitLogin = () => {
-    loginPost();
+    //TODO : validation 검사 추가
+    if (id === "" || pwd === "") {
+      alert("아이디 또는 비밀번호를 확인해주세요.");
+    } else {
+      loginPost();
+    }
   };
 
   const loginPost = async () => {
     try {
       await commonApi
         .send_login({ username: id, password: pwd })
-        .then((response) => {
-          console.log(response);
+        .then((response: any) => {
+          if (response.status === 200) {
+            onChangeLoginState();
+          }
         });
     } catch (e) {
       alert("아이디나 비밀번호를 다시 확인해주세요.");

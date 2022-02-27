@@ -9,7 +9,7 @@ import SearchBar from "../components/SearchBar";
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); //recoil 사용 필요
 
   const onModalBtnClick = () => {
     setIsModalOpen((current) => !current);
@@ -19,9 +19,18 @@ const Home = () => {
     setIsLoading((current) => !current);
   };
 
+  const onChangeLoginState = () => {
+    setIsLoggedIn((current) => !current);
+  };
+
   return (
     <div className="container">
-      <HeaderMenu isModalOpen={isModalOpen} onModalBtnClick={onModalBtnClick} />
+      {!isLoggedIn && (
+        <HeaderMenu
+          isModalOpen={isModalOpen}
+          onModalBtnClick={onModalBtnClick}
+        />
+      )}
       <Logo />
       <SearchBar
         isLoading={isLoading}
@@ -31,6 +40,8 @@ const Home = () => {
         <LoginModal
           isModalOpen={isModalOpen}
           onModalBtnClick={onModalBtnClick}
+          isLoggedIn={isLoggedIn}
+          onChangeLoginState={onChangeLoginState}
         />
       )}
       {isLoading && <LoadingModal />}
