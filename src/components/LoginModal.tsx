@@ -4,23 +4,18 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import commonApi from "../apis/commonApi";
+import { loginState } from "../atom";
+import { useRecoilState } from "recoil";
 
 interface Props {
   isModalOpen: boolean;
   onModalBtnClick: () => void;
-
-  isLoggedIn: boolean;
-  onChangeLoginState: () => void;
 }
 
-const LoginModal = ({
-  isModalOpen,
-  onModalBtnClick,
-  isLoggedIn,
-  onChangeLoginState,
-}: Props) => {
+const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
   const [id, setId] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
 
   const onIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -46,12 +41,13 @@ const LoginModal = ({
         .then((response: any) => {
           if (response.status === 200) {
             alert("로그인 성공!");
-            onChangeLoginState(); //로그인 상태 변경
+            setIsLoggedIn(true); //로그인 상태 변경
             onModalBtnClick(); //모달 닫기
           }
         });
     } catch (e) {
       alert("아이디나 비밀번호를 다시 확인해주세요.");
+      setIsLoggedIn(false);
       console.log(e);
     }
   };
