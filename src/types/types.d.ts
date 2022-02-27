@@ -44,3 +44,11 @@ declare module "SearchModule" {
     }
   }
 }
+
+declare module "RecoilModule" {
+  export namespace RecoilProps {
+    interface loginProps {
+      loginState: boolean;
+    }
+  }
+}
