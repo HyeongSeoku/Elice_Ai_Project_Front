@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginState } from "../atom";
 import { LoadingModal } from "../components";
 import HeaderMenu from "../components/HeaderMenu";
 import LoginModal from "../components/LoginModal";
@@ -9,7 +11,7 @@ import SearchBar from "../components/SearchBar";
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); //recoil 사용 필요
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
 
   const onModalBtnClick = () => {
     setIsModalOpen((current) => !current);
@@ -17,10 +19,6 @@ const Home = () => {
 
   const onChangeLoadingState = () => {
     setIsLoading((current) => !current);
-  };
-
-  const onChangeLoginState = () => {
-    setIsLoggedIn((current) => !current);
   };
 
   return (
@@ -40,8 +38,6 @@ const Home = () => {
         <LoginModal
           isModalOpen={isModalOpen}
           onModalBtnClick={onModalBtnClick}
-          isLoggedIn={isLoggedIn}
-          onChangeLoginState={onChangeLoginState}
         />
       )}
       {isLoading && <LoadingModal />}
