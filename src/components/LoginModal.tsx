@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import commonApi from "../apis/commonApi";
 
 interface Props {
   isModalOpen: boolean;
@@ -27,7 +28,19 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
   };
 
   const onSubmitLogin = () => {
-    if (id === tmpId && pwd === tmpPwd) {
+    loginPost();
+  };
+
+  const loginPost = async () => {
+    try {
+      await commonApi
+        .send_login({ username: id, password: pwd })
+        .then((response) => {
+          console.log(response);
+        });
+    } catch (e) {
+      alert("아이디나 비밀번호를 다시 확인해주세요.");
+      console.log(e);
     }
   };
 
@@ -59,7 +72,12 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
         </div>
         <div className="w-full flex justify-center items-center space-x-2 mt-10 mb-1">
           <button className="bg-blue-200 py-2 px-5 rounded-xl">회원가입</button>
-          <button className="bg-green-200 py-2 px-5 rounded-xl">로그인</button>
+          <button
+            className="bg-green-200 py-2 px-5 rounded-xl"
+            onClick={onSubmitLogin}
+          >
+            로그인
+          </button>
         </div>
       </div>
     </div>
