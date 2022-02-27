@@ -24,14 +24,13 @@ declare module "VideoAnalysisModule" {
         keywordCnt: { keyword: string; count: number }[];
         timeStamp: {
           id: string;
-          color: string;
-          data: { time: number; score: number }[];
+          data: { x: string; y: number }[];
         }[];
-        timStampContents: { time: number; contents: string }[];
+        timStampContents: { time: string; contents: string }[];
       };
       timeStamp: {
         id: string;
-        data: { x: number; y: number }[];
+        data: { x: string; y: number }[];
       }[];
     }
   }
