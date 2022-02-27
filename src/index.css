@@ -1,13 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("./styles/MyPage.css");
+@import url("./styles/myPage.css");
+@import url("./styles/common.css");
 
 #root {
   width: 100vw;
   height: 100vh;
-}
-
-.container {
-  @apply w-full h-full flex flex-col justify-center items-center mx-auto p-5 box-border;
 }
