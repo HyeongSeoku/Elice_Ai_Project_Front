@@ -50,7 +50,9 @@ const LoginModal = ({
         .send_login({ username: id, password: pwd })
         .then((response: any) => {
           if (response.status === 200) {
-            onChangeLoginState();
+            alert("로그인 성공!");
+            onChangeLoginState(); //로그인 상태 변경
+            onModalBtnClick(); //모달 닫기
           }
         });
     } catch (e) {
