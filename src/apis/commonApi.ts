@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const END_POINT = "http://localhost:5000/";
+const END_POINT = "http://localhost:8000/";
 
 const postApi = async (url: string, data: any) => {
   const result = await axios.post(url, data);
