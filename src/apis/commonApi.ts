@@ -38,6 +38,9 @@ const commonApi = {
   send_login: async (data: any) => {
     return await postApi(`${END_POINT}/user/login/token/`, data);
   },
+  send_regist: async (userData: any) => {
+    return await postApi(`${END_POINT}/user/register/`, userData);
+  },
 };
 
 export default commonApi;
