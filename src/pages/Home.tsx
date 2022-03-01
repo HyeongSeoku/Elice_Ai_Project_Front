@@ -23,12 +23,8 @@ const Home = () => {
 
   return (
     <div className="container">
-      {!isLoggedIn && (
-        <HeaderMenu
-          isModalOpen={isModalOpen}
-          onModalBtnClick={onModalBtnClick}
-        />
-      )}
+      <HeaderMenu isModalOpen={isModalOpen} onModalBtnClick={onModalBtnClick} />
+
       <Logo />
       <SearchBar
         isLoading={isLoading}
