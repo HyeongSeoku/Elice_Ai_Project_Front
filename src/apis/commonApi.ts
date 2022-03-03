@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const END_POINT = "http://localhost:8000";
+import { API_END_POINT } from "../constants/standard";
 
 const postApi = async (url: string, data: any) => {
   const result = await axios.post(url, data);
@@ -36,10 +35,13 @@ const getApi = async (url: string) => {
 
 const commonApi = {
   send_login: async (data: any) => {
-    return await postApi(`${END_POINT}/user/login/token/`, data);
+    return await postApi(`${API_END_POINT}/user/login/token/`, data);
   },
   send_regist: async (userData: any) => {
-    return await postApi(`${END_POINT}/user/register/`, userData);
+    return await postApi(`${API_END_POINT}/user/register/`, userData);
+  },
+  send_logout: async (user: any) => {
+    return await postApi(`${API_END_POINT}/user/logout/`, user);
   },
 };
 
