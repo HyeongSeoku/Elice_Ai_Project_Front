@@ -47,7 +47,7 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
   const loginPost = async () => {
     try {
       await commonApi
-        .send_login({ username: id, password: pwd })
+        .send_login({ user_ID: id, password: pwd })
         .then((response: any) => {
           if (response.status === 200) {
             alert("로그인 성공!");
