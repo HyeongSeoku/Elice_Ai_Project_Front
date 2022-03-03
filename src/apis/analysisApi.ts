@@ -1,11 +1,29 @@
 import axios from "axios";
-
-const END_POINT = "http://localhost:8000";
+import { API_END_POINT } from "../constants/standard";
 
 const getApi = async (url: string) => {
   const result = await axios.get(url);
   switch (result.status) {
     case 200:
+      return result;
+    case 404:
+      console.error("데이터가 없습니다.");
+      //TODO : throw new Error() 방식 사용
+      return false;
+    case 500:
+      console.error("Internal Error");
+      return false;
+    default:
+      console.log("네트워크 오류 발생");
+  }
+};
+
+const postApi = async (url: string, data: any) => {
+  const result = await axios.post(url, data);
+  switch (result.status) {
+    case 200:
+      return result;
+    case 201:
       return result;
     case 404:
       console.error("데이터가 없습니다.");
@@ -19,11 +37,11 @@ const getApi = async (url: string) => {
 };
 
 const analysisApi = {
-  getKeywordFreq: async (videoId: any) => {
-    return await getApi(`${END_POINT}/videos/${videoId}/frequencies`);
+  getVideoDetail: async (videoId: any) => {
+    return await getApi(`${API_END_POINT}/videos/${videoId}/`);
   },
-  getTimeStamp: async (videoId: any) => {
-    return await getApi(`${END_POINT}/videos/${videoId}/script`);
+  getVideoId: async (videoUrl: any) => {
+    return await postApi(`${API_END_POINT}/videos/`, videoUrl);
   },
 };
 
