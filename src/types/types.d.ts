@@ -16,22 +16,20 @@ declare module "VideoAnalysisModule" {
   export namespace VideoAnalysisTypes {
     interface videoAnalysisProps {
       analyzedVideo: {
-        videoId: number;
-        videoUrl: string;
+        id: number;
+        source: string;
         thumbnail: string;
-        owner: string;
+        author: string;
         title: string;
-        keywordCnt: { keyword: string; count: number }[];
-        timeStamp: {
-          id: string;
-          data: { x: string; y: number }[];
+        keywords_frequency: { keyword: string; count: number }[];
+        time_scripts: {
+          timestamp: string;
+          content: string;
+          importance_score: number;
         }[];
-        timStampContents: { time: string; contents: string }[];
+        time_keywords: { timestamp: string; contents: string; score: number }[];
+        user_id: string | null;
       };
-      timeStamp: {
-        id: string;
-        data: { x: string; y: number }[];
-      }[];
     }
   }
 }
