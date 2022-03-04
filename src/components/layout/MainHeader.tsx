@@ -7,8 +7,8 @@ interface HeaderProps {
 
 const MainHeader = () => {
   return (
-    <header className="w-full flex flex-row">
-      <HeaderMenu />
+    <header className="flex flex-row w-full">
+      {/* <HeaderMenu /> */}
     </header>
   );
 };

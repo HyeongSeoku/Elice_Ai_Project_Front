@@ -1,15 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import MainFooter from "./MainFooter";
 import MainHeader from "./MainHeader";
-interface ChildComponent {
-  children: React.FC;
-}
 
-const MainLayout = ({ children }: ChildComponent) => {
+
+const MainLayout: FC = (props) => {
   return (
     <>
       <MainHeader />
-      <main>{children}</main>
+      <main className="container">
+        {props.children}
+      </main>
       <MainFooter />
     </>
   );

@@ -7,6 +7,7 @@ import HeaderMenu from "../components/HeaderMenu";
 import LoginModal from "../components/LoginModal";
 import Logo from "../components/Logo";
 import SearchBar from "../components/SearchBar";
+import MainLayout from '../components/layout/MainLayout'
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -22,9 +23,8 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
+    <MainLayout>
       <HeaderMenu isModalOpen={isModalOpen} onModalBtnClick={onModalBtnClick} />
-
       <Logo />
       <SearchBar
         isLoading={isLoading}
@@ -37,7 +37,7 @@ const Home = () => {
         />
       )}
       {isLoading && <LoadingModal />}
-    </div>
+    </MainLayout>
   );
 };
 
