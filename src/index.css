@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("./styles/myPage.css");
+@import url("./styles/common.css");
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
