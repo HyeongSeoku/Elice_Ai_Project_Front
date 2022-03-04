@@ -20,86 +20,6 @@ const SearchBar = ({
     }
   }, [videoId]);
 
-  const testData = [
-    {
-      id: "중요도",
-      data: [
-        {
-          x: "00:00:00",
-          y: 0.0,
-        },
-        {
-          x: "00:00:10",
-          y: 0.4,
-        },
-        {
-          x: "00:00:20",
-
-          y: 1.0,
-        },
-        {
-          x: "00:00:30",
-          y: 1.4,
-        },
-        {
-          x: "00:00:40",
-          y: 2.5,
-        },
-        {
-          x: "00:00:50",
-
-          y: 3.5,
-        },
-        {
-          x: "00:01:50",
-
-          y: 6.5,
-        },
-        {
-          x: "00:02:50",
-
-          y: 1.5,
-        },
-        {
-          x: "00:03:50",
-
-          y: 0.5,
-        },
-        {
-          x: "00:04:50",
-
-          y: 30.5,
-        },
-        {
-          x: "00:05:50",
-
-          y: 1.5,
-        },
-        {
-          x: "00:06:50",
-
-          y: 10.5,
-        },
-        {
-          x: "00:07:50",
-
-          y: 2.5,
-        },
-      ],
-    },
-  ];
-
-  const testAnalyzedData = {
-    videoId: 1,
-    videoUrl: "https://www.youtube.com/embed/3AyMjyHu1bA",
-    thumbnail: "Asdv",
-    owner: "testOwner",
-    title: "testTitle",
-    keywordCnt: [{ keyword: "sdvsdv", count: 10 }],
-    timeStamp: testData,
-    timStampContents: [{ time: "00:00:01", contents: "avasd" }],
-  };
-
   const onSearchWordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     //[임시] 로딩 중일때 이벤트 막아놓음
@@ -147,12 +67,14 @@ const SearchBar = ({
   //분석 요청시 가장 처음 실행되는 메소드 1번 함수
   const getVideoId = async (text: string) => {
     try {
-      await analysisApi.getVideoId({ source: text }).then((response: any) => {
-        if (response.status === 201) {
-          console.log("api 요청 성공");
-          setVideoId(response.data.video_id);
-        }
-      });
+      await analysisApi
+        .getVideoId({ youtube_slug: text })
+        .then((response: any) => {
+          if (response.status === 201) {
+            console.log("api 요청 성공");
+            setVideoId(response.data.video_id);
+          }
+        });
     } catch (e) {
       console.log(e);
     }
@@ -169,7 +91,7 @@ const SearchBar = ({
             onChangeLoadingState();
             setSearchWord("");
             navigate("/analysis", { state: { analyzedVideo: tmpData } });
-          }, 4000);
+          }, 2000);
         }
       });
     } catch (e) {
