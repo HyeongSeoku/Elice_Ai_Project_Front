@@ -14,16 +14,14 @@ const getApi = async (url: string) => {
       console.error("Internal Error");
       return false;
     default:
-      console.log("네트워크 오류 발생");
+      console.error("네트워크 오류 발생");
   }
 };
 
 const postApi = async (url: string, data: any) => {
   const result = await axios.post(url, data);
   switch (result.status) {
-    case 200:
-      return result;
-    case 201:
+    case 200: case 201:
       return result;
     case 404:
       console.error("데이터가 없습니다.");
@@ -32,7 +30,7 @@ const postApi = async (url: string, data: any) => {
       console.error("Internal Error");
       return false;
     default:
-      console.log("네트워크 오류 발생");
+      console.error("네트워크 오류 발생");
   }
 };
 

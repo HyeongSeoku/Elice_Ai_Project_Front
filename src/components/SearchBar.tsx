@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { SearchTypes } from "SearchModule";
@@ -10,15 +10,7 @@ const SearchBar = ({
   onChangeLoadingState,
 }: SearchTypes.searchProps) => {
   const [searchWord, setSearchWord] = useState<string>("");
-  const [videoId, setVideoId] = useState<number>(0);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (videoId !== 0) {
-      //api 실행
-      getDetailInfoVideo(videoId);
-    }
-  }, [videoId]);
 
   const onSearchWordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -33,14 +25,20 @@ const SearchBar = ({
   //1.영상의 아이디가 특정되지 않았을 경우
   //2.URL이 영상이 아닐 경우
   //3.분석이 불가능할 경우
-  const onSubmitSearch = (e: React.SyntheticEvent) => {
+  const onSubmitSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     //문자열에서 유튜브 영상의 아이디값 저장
     const urlStr: string = getUrlId(searchWord);
     //데이터 분석 요청 메소드 (비동기 처리)
-    if (!isLoading) {
+    if (!isLoading && urlStr !== 'error') {
       onChangeLoadingState();
-      getVideoId(urlStr);
+      const videoId = await getVideoId(urlStr);
+      const videoDetail = await getDetailInfoVideo(videoId)
+
+      onChangeLoadingState();
+      setSearchWord("");
+      navigate("/analysis", { state: { analyzedVideo: videoDetail } });
+
       //TODO : 요청한 데이터 잘 올떄까지 기다린후 로딩 false로 변환
       return;
     }
@@ -67,44 +65,42 @@ const SearchBar = ({
   //분석 요청시 가장 처음 실행되는 메소드 1번 함수
   const getVideoId = async (text: string) => {
     try {
-      await analysisApi
+      const videoId = await analysisApi
         .getVideoId({ youtube_slug: text })
         .then((response: any) => {
-          if (response.status === 201) {
-            console.log("api 요청 성공");
-            setVideoId(response.data.video_id);
-          }
+          console.log("api 요청 성공");
+          return response.data.video_id
         });
+      return videoId
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
   //리턴 받은 비디오 아이디를 통해 비디오 세부 디테일을 받아오는 메소드 2번함수
   const getDetailInfoVideo = async (videoId: number) => {
     try {
-      await analysisApi.getVideoDetail(videoId).then((response: any) => {
-        if (response.status === 200) {
-          const tmpData = response.data;
+      return await analysisApi.getVideoDetail(videoId)
+        .then((response: any) => {
           console.log(response.data);
-          setTimeout(() => {
-            onChangeLoadingState();
-            setSearchWord("");
-            navigate("/analysis", { state: { analyzedVideo: tmpData } });
-          }, 2000);
-        }
-      });
+          return response.data;
+          // setTimeout(() => {
+          //   onChangeLoadingState();
+          //   setSearchWord("");
+          //   navigate("/analysis", { state: { analyzedVideo: tmpData } });
+          // }, 2000);
+        });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
   return (
-    <div className="sm:w-100 lg:w-1/3 h-16  rounded-2xl flex box-border p-2 items-baseline  bg-slate-300 focus:bg-slate-400 ">
-      <FontAwesomeIcon icon={faSearch} className="flex-grow-0 text-lg ml-2" />
+    <div className="box-border flex items-baseline h-16 p-2 sm:w-100 lg:w-1/3 rounded-2xl bg-slate-300 focus:bg-slate-400 ">
+      <FontAwesomeIcon icon={faSearch} className="flex-grow-0 ml-2 text-lg" />
       <form className="w-full" onSubmit={onSubmitSearch}>
         <input
-          className="grow w-full h-full rounded-2xl box-border p-3 text-lg ml-2 bg-inherit focus:outline-none"
+          className="box-border w-full h-full p-3 ml-2 text-lg grow rounded-2xl bg-inherit focus:outline-none"
           value={searchWord}
           onChange={onSearchWordChange}
         />

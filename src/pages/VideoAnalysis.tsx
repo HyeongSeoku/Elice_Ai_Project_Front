@@ -29,10 +29,18 @@ const VideoAnalysis = () => {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll">
+      <button onClick={() => {
+        console.debug('개발용도') // 테스트 및 배포에는 포함되면 안됨
+        console.info('정보용, 알림용') // 테스트까지 포함
+        console.log('일반 로그') // 테스트까지 포함
+        console.warn('경고') // 모두 포함
+        console.error('error') // 모두 포함
+      }}>test</button>
       <h1>분석</h1>
-      <section className="w-full h-full flex flex-col justify-center items-center overflow-auto">
+      <section className="flex flex-col items-center justify-center w-full h-full overflow-auto">
         <div style={{ width: "50%", height: "50%" }}>
           <iframe
+            title='temp title'
             className="w-full h-full"
             src={`https://www.youtube.com/embed/${videoId}`}
           ></iframe>
@@ -43,6 +51,8 @@ const VideoAnalysis = () => {
           <ResponsiveLine
             curve={"monotoneX"}
             data={graphData}
+            onClick={(point, event) => console.log(point)}
+            onMouseEnter={(point, event) => console.log(point)}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: "point" }}
             yScale={{
