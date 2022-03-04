@@ -56,34 +56,41 @@ const Regist = () => {
     }
     if (!isId(id)) {
       if (id.length < ID_MIN_LENGTH || id.length > ID_MAX_LENGTH) {
-        alert(`비밀번호는 ${ID_MIN_LENGTH}~${ID_MAX_LENGTH}로 설정해주세요.`);
+        alert(`아이디 ${ID_MIN_LENGTH}~${ID_MAX_LENGTH}로 설정해주세요.`);
         return;
       } else {
-        alert("비밀번호 형식이 맞지 않습니다.");
+        alert("아이디 형식이 맞지 않습니다.");
         return;
       }
     }
     if (!isPassword(pwd)) {
+      console.log(isPassword(pwd));
       if (pwd.length < PWD_MIN_LENGTH || pwd.length > PWD_MAX_LENGTH) {
         alert(`비밀번호는 ${PWD_MIN_LENGTH}~${PWD_MAX_LENGTH}로 설정해주세요.`);
-        return;
       } else {
         alert("비밀번호 형식이 맞지 않습니다.");
-        return;
       }
+      return;
     }
     if (!isEmail(email)) {
       alert("이메일 형식이 맞지 않습니다.");
       return;
     } else {
-      sendRequestRegist({ userId: id, userEmail: email, userPwd: pwd });
+      //TODO : userId ,email,password 이런식으로 바꿀예정
+      sendRequestRegist({
+        user_ID: id,
+        email: email,
+        password: pwd,
+        password2: pwdCheck,
+      });
     }
   };
 
   const sendRequestRegist = async (data: any) => {
     try {
       await commonApi.send_regist(data).then((response: any) => {
-        if (response?.status === 200) {
+        console.log(response);
+        if (response?.status === 201) {
           alert("회원가입 성공");
           setId("");
           setEmail("");
@@ -109,7 +116,6 @@ const Regist = () => {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
     return regExp.test(asValue);
   }
-
   function isEmail(asValue: string) {
     var regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
