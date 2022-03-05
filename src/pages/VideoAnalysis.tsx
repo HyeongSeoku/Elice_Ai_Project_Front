@@ -1,6 +1,14 @@
 import { useLocation } from "react-router-dom";
 import { VideoAnalysisTypes } from "VideoAnalysisModule";
 import { ResponsiveLine } from "@nivo/line";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { ScriptItem } from "../components";
 
 const VideoAnalysis = () => {
@@ -10,14 +18,17 @@ const VideoAnalysis = () => {
   const tmpId = analysisData.source.split("v=");
 
   const videoId = tmpId[tmpId.length - 1];
-  console.log(videoId);
+  console.log(state.analyzedVideo, videoId);
   //데이터 처리
   //TODO : 타입 지정
   const timeStampData: any[] = [];
   const timeStampContents: any[] = [];
 
   analysisData.time_scripts.forEach((item) => {
-    timeStampData.push({ x: item.timestamp, y: item.importance_score });
+    timeStampData.push({
+      timeStamp: item.timestamp,
+      score: item.importance_score,
+    });
     timeStampContents.push({
       timeStamp: item.timestamp,
       contents: item.content,
@@ -28,82 +39,51 @@ const VideoAnalysis = () => {
   console.log(state);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll">
-      <button onClick={() => {
-        console.debug('개발용도') // 테스트 및 배포에는 포함되면 안됨
-        console.info('정보용, 알림용') // 테스트까지 포함
-        console.log('일반 로그') // 테스트까지 포함
-        console.warn('경고') // 모두 포함
-        console.error('error') // 모두 포함
-      }}>test</button>
+    <div className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll">
       <h1>분석</h1>
       <section className="flex flex-col items-center justify-center w-full h-full overflow-auto">
-        <div style={{ width: "50%", height: "50%" }}>
-          <iframe
-            title='temp title'
-            className="w-full h-full"
-            src={`https://www.youtube.com/embed/${videoId}`}
-          ></iframe>
+        <div className="flex flex-row w-3/4 h-full mt-2 mb-2">
+          <div className="flex-grow" style={{ width: "100%", height: "100%" }}>
+            단어 위치할 예정
+          </div>
+          <div
+            className="flex-grow bg-slate-300 box-border p-5 rounded-md"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <div style={{ width: "100%", height: "90%" }}>
+              <iframe
+                title="temp title"
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${videoId}`}
+              />
+            </div>
+            <div className="flex flex-row items-baseline">
+              <div className="bg-slate-400 rounded-2xl mr-2 w-10 text-center font-bold">
+                제목
+              </div>
+              <strong className="mt-1">{analysisData.title}</strong>
+            </div>
+            <div className="font-light">{analysisData.author}</div>
+          </div>
         </div>
-        <div style={{ height: "3%" }}>{analysisData.title}</div>
-        <div style={{ height: "3%" }}>{analysisData.author}</div>
-        <div className="w-full" style={{ height: "40%" }}>
-          <ResponsiveLine
-            curve={"monotoneX"}
-            data={graphData}
-            onClick={(point, event) => console.log(point)}
-            onMouseEnter={(point, event) => console.log(point)}
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "auto",
-              max: "auto",
-              stacked: true,
-              reverse: false,
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisLeft={{ legend: "빈도 수", legendPosition: "middle" }}
-            axisBottom={{
-              legend: "타임 라인",
-              legendPosition: "middle",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-            }}
-            pointColor={{ theme: "background" }}
-            lineWidth={1}
-            pointSize={0}
-            useMesh={true}
-            crosshairType="cross"
-            legends={[
-              {
-                anchor: "bottom-right",
-                direction: "column",
-                justify: false,
-                translateX: 100,
-                translateY: 0,
-                itemsSpacing: 0,
-                itemDirection: "left-to-right",
-                itemWidth: 100,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 12,
-                symbolShape: "circle",
-                symbolBorderColor: "rgba(0, 0, 0, .5)",
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemBackground: "rgba(0, 0, 0, .03)",
-                      itemOpacity: 1,
-                    },
-                  },
-                ],
-              },
-            ]}
-          />
+
+        <div
+          className="w-3/4 overflow-x-scroll mb-5 box-border p-5"
+          style={{ height: "70%" }}
+        >
+          <div className="w-screen h-full">
+            <ResponsiveContainer width={3000} height="95%">
+              <LineChart
+                data={timeStampData}
+                margin={{ top: 5, right: 10, left: 10 }}
+              >
+                <Line type="monotone" dataKey={"score"} stroke="#8884d8" />
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey={"timeStamp"} />
+                <YAxis />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
         <div style={{ width: "50%", height: "20%" }}>
           {timeStampContents.map((item) => (
