@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ScriptItem } from "../components";
+import { KeyWord, ScriptItem } from "../components";
 
 const VideoAnalysis = () => {
   const location = useLocation();
@@ -23,6 +23,7 @@ const VideoAnalysis = () => {
   //TODO : 타입 지정
   const timeStampData: any[] = [];
   const timeStampContents: any[] = [];
+  console.log(state.analyzedVideo);
 
   analysisData.time_scripts.forEach((item) => {
     timeStampData.push({
@@ -43,8 +44,18 @@ const VideoAnalysis = () => {
       <h1>분석</h1>
       <section className="flex flex-col items-center justify-center w-full h-full overflow-auto">
         <div className="flex flex-row w-3/4 h-full mt-2 mb-2">
-          <div className="flex-grow" style={{ width: "100%", height: "100%" }}>
-            단어 위치할 예정
+          <div
+            className="flex-grow box-border p-2"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <div className="text-4xl font-bold mb-5">자주 등장한 단어</div>
+            <div className="flex flex-row w-full h-full">
+              {analysisData.keywords_frequency.map((item, idx) => {
+                if (idx < 3) {
+                  return <KeyWord keywordObj={item} />;
+                }
+              })}
+            </div>
           </div>
           <div
             className="flex-grow bg-slate-300 box-border p-5 rounded-md"
@@ -68,7 +79,7 @@ const VideoAnalysis = () => {
         </div>
 
         <div
-          className="w-3/4 overflow-x-scroll mb-5 box-border p-5"
+          className="w-3/4 overflow-x-scroll mb-5 box-border p-2 "
           style={{ height: "70%" }}
         >
           <div className="w-screen h-full">
