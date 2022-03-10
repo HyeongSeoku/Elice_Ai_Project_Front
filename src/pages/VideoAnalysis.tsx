@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { VideoAnalysisTypes } from "VideoAnalysisModule";
-import { ResponsiveLine } from "@nivo/line";
+import { TagCloud } from "react-tagcloud";
+
 import {
   CartesianGrid,
   Line,
@@ -9,22 +10,38 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { KeyWord, ScriptItem } from "../components";
+import {
+  AnalysisHeader,
+  HeaderMenu,
+  KeyWord,
+  LoginModal,
+  ScriptItem,
+} from "../components";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atom";
 
 const VideoAnalysis = () => {
   const location = useLocation();
   const state = location.state as VideoAnalysisTypes.videoAnalysisProps;
   const analysisData = state.analyzedVideo;
-  const tmpId = analysisData.source.split("v=");
-
-  const videoId = tmpId[tmpId.length - 1];
-  console.log(state.analyzedVideo, videoId);
-  //데이터 처리
+  const videoId = analysisData.youtube_slug;
+  const saveId = analysisData.id;
   //TODO : 타입 지정
   const timeStampData: any[] = [];
   const timeStampContents: any[] = [];
-  console.log(state.analyzedVideo);
+  const tagCloudDate: any[] = [];
 
+  const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
+
+  console.log(state);
+
+  //tag cloud color
+  const cloudOptions = {
+    luminosity: "light",
+    hue: "blue",
+  };
+
+  //데이터 처리
   analysisData.time_scripts.forEach((item) => {
     timeStampData.push({
       timeStamp: item.timestamp,
@@ -35,26 +52,42 @@ const VideoAnalysis = () => {
       contents: item.content,
     });
   });
-  const graphData: any[] = [{ id: "분석 데이터", data: timeStampData }];
-  console.log(timeStampData);
-  console.log(state);
+
+  state.analyzedVideo.keywords_frequency.forEach((item) => {
+    tagCloudDate.push({
+      value: item.keyword,
+      count: item.count,
+    });
+  });
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll">
-      <h1>분석</h1>
+      <header style={{ height: "10%" }}>
+        <AnalysisHeader id={saveId} />
+      </header>
       <section className="flex flex-col items-center justify-center w-full h-full overflow-auto">
-        <div className="flex flex-row w-3/4 h-full mt-2 mb-2">
-          <div
-            className="flex-grow box-border p-2"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <div className="text-4xl font-bold mb-5">자주 등장한 단어</div>
-            <div className="flex flex-row w-full h-full">
-              {analysisData.keywords_frequency.map((item, idx) => {
-                if (idx < 3) {
-                  return <KeyWord keywordObj={item} />;
-                }
-              })}
+        <div className="flex flex-col w-full laptop:flex-row laptop:w-3/4 h-full mt-2 mb-2  ">
+          <div className="flex flex-col flex-grow  box-border p-2 bg-slate-200 rounded-md mr-1">
+            <div
+              className=" box-border p-2"
+              style={{ width: "100%", height: "100%" }}
+            >
+              <div className="text-4xl font-bold mb-5">자주 등장한 단어</div>
+              <div className="flex flex-row w-full h-full">
+                {analysisData.keywords_frequency.map((item, idx) => {
+                  if (idx < 3) {
+                    return <KeyWord key={idx} keywordObj={item} />;
+                  }
+                })}
+              </div>
+            </div>
+            <div className="bg-slate-300 rounded-md box-border p-2">
+              <TagCloud
+                minSize={12}
+                maxSize={35}
+                tags={tagCloudDate}
+                colorOptions={cloudOptions}
+              />
             </div>
           </div>
           <div
@@ -96,12 +129,15 @@ const VideoAnalysis = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div style={{ width: "50%", height: "20%" }}>
-          {timeStampContents.map((item) => (
-            <ScriptItem key={item.timeStamp} timeLine={item} />
-          ))}
+        <div className="flex flex-row" style={{ width: "50%", height: "20%" }}>
+          <div className="flex-grow">
+            {timeStampContents.map((item) => (
+              <ScriptItem key={item.timeStamp} timeLine={item} />
+            ))}
+          </div>
         </div>
       </section>
+      {isModalOpen && <LoginModal />}
     </div>
   );
 };
