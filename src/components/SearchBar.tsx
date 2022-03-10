@@ -30,10 +30,10 @@ const SearchBar = ({
     //문자열에서 유튜브 영상의 아이디값 저장
     const urlStr: string = getUrlId(searchWord);
     //데이터 분석 요청 메소드 (비동기 처리)
-    if (!isLoading && urlStr !== 'error') {
+    if (!isLoading && urlStr !== "error") {
       onChangeLoadingState();
       const videoId = await getVideoId(urlStr);
-      const videoDetail = await getDetailInfoVideo(videoId)
+      const videoDetail = await getDetailInfoVideo(videoId);
 
       onChangeLoadingState();
       setSearchWord("");
@@ -69,9 +69,9 @@ const SearchBar = ({
         .getVideoId({ youtube_slug: text })
         .then((response: any) => {
           console.log("api 요청 성공");
-          return response.data.video_id
+          return response.data.video_id;
         });
-      return videoId
+      return videoId;
     } catch (e) {
       console.error(e);
     }
@@ -80,23 +80,22 @@ const SearchBar = ({
   //리턴 받은 비디오 아이디를 통해 비디오 세부 디테일을 받아오는 메소드 2번함수
   const getDetailInfoVideo = async (videoId: number) => {
     try {
-      return await analysisApi.getVideoDetail(videoId)
-        .then((response: any) => {
-          console.log(response.data);
-          return response.data;
-          // setTimeout(() => {
-          //   onChangeLoadingState();
-          //   setSearchWord("");
-          //   navigate("/analysis", { state: { analyzedVideo: tmpData } });
-          // }, 2000);
-        });
+      return await analysisApi.getVideoDetail(videoId).then((response: any) => {
+        console.log(response.data);
+        return response.data;
+        // setTimeout(() => {
+        //   onChangeLoadingState();
+        //   setSearchWord("");
+        //   navigate("/analysis", { state: { analyzedVideo: tmpData } });
+        // }, 2000);
+      });
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <div className="box-border flex items-baseline h-16 p-2 sm:w-100 lg:w-1/3 rounded-2xl bg-slate-300 focus:bg-slate-400 ">
+    <div className="box-border flex items-baseline h-16 p-2 w-100 laptop:w-1/3 rounded-2xl bg-slate-300 focus:bg-slate-400 ">
       <FontAwesomeIcon icon={faSearch} className="flex-grow-0 ml-2 text-lg" />
       <form className="w-full" onSubmit={onSubmitSearch}>
         <input
