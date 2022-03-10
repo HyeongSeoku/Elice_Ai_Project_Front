@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import LogoImg from "../img/elice_ai_logo.png";
 
 const Logo = () => {
   const navigate = useNavigate();
 
   const onClickHome = () => {
     navigate("/", { replace: true });
-    console.log("zmfflr");
   };
 
   return (
-    <div className=" mb-1" onClick={onClickHome}>
-      <span className="text-3xl font-bold">LOGO</span>
+    <div onClick={onClickHome}>
+      <img className="w-auto h-16 laptop:h-20 m-0" src={LogoImg} />
     </div>
   );
 };

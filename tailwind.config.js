@@ -12,11 +12,7 @@ module.exports = {
       desktop: "1280px",
       // => @media (min-width: 1280px) { ... }
     },
-    extend: {
-      backgroundImage: {
-        "home-img": "url('/src/img/data_bg.jpeg')",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

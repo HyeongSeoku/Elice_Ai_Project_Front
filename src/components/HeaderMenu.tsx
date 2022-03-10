@@ -25,11 +25,11 @@ const HeaderMenu = () => {
   };
 
   return (
-    <div className="w-full flex flex-row  fixed top-0 items-baseline right-0 left-0 space-x-2 box-border p-3">
+    <div className="flex flex-row fixed top-0 right-0 left-0 z-10 space-x-2 box-border p-3">
       <div className="flex-grow ml-3">
         <Logo />
       </div>
-      <div className="flex felx-row justify-end flex-grow">
+      <div className="flex felx-row justify-end items-baseline flex-grow mt-5 ">
         {isLoggedIn && (
           <div className="flex space-x-2 ">
             <Link to="/mypage">

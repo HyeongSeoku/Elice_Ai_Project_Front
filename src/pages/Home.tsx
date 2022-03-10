@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center mx-auto p-5  overflow-scroll">
+    <div className="  mx-auto p-5  overflow-scroll">
       <HeaderMenu />
       <section
         className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden relative"
@@ -50,35 +50,18 @@ const Home = () => {
         {isModalOpen && <LoginModal />}
         {isLoading && <LoadingModal />}
       </section>
-      <section className="w-full relative">
+      <section className="flex flex-row justify-center items-center">
         <div
-          className="text-blue-300 font-bold text-2xl  "
+          className="text-blue-300 font-bold text-2xl"
           style={{
-            transform: `translateX(${scrollPosition}px)`,
             width: "500px",
           }}
         >
-          Qui quis proident mollit dolore excepteur adipisicing. Sit adipisicing
-          sunt aute irure in dolor sit laboris magna sunt eiusmod. Dolore veniam
-          qui amet est in cupidatat ullamco. Culpa nulla aliquip elit proident
-          sunt. Nostrud est deserunt cillum adipisicing voluptate minim. Cillum
-          nisi incididunt id ea culpa.
+          <div>우리와 너무나도 밀접해진 영상 미디어들,</div>
+          <div>바쁜 사회 속 아끼는 방법을 한가지 더 해보세요.</div>
         </div>
       </section>
-      <div className="text-green-300 font-bold text-2xl">
-        Qui quis proident mollit dolore excepteur adipisicing. Sit adipisicing
-        sunt aute irure in dolor sit laboris magna sunt eiusmod. Dolore veniam
-        qui amet est in cupidatat ullamco. Culpa nulla aliquip elit proident
-        sunt. Nostrud est deserunt cillum adipisicing voluptate minim. Cillum
-        nisi incididunt id ea culpa.
-      </div>
-      <div className="text-red-300 font-bold text-2xl">
-        Qui elit ut aliquip laborum. Voluptate id cillum dolore aute ad minim et
-        labore aliquip proident magna. Labore incididunt id esse anim id do
-        aliquip nisi sit aute. Excepteur do elit adipisicing consequat
-        excepteur. Labore fugiat voluptate reprehenderit duis enim incididunt
-        cillum aliquip id anim.
-      </div>
+
       <div className="text-purple-300 font-bold text-2xl">
         주소와 검색 한번이면 완료.
       </div>
