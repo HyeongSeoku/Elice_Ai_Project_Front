@@ -1,13 +1,18 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { RecoilProps } from "RecoilModule";
 import { Logo, UserInfo } from ".";
+import analysisApi from "../apis/analysisApi";
 import { loginState, modalState } from "../atom";
 
-const HeaderMenu = () => {
+interface Props {
+  id: string;
+}
+
+const AnalysisHeader = ({ id }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(modalState);
+  console.log(id);
 
   const onChangeLoginState = () => {
     if (isLoggedIn) {
@@ -24,8 +29,27 @@ const HeaderMenu = () => {
     setIsModalOpen((current) => !current);
   };
 
+  const sendSaveRequeset = async (videoId: string, token?: string) => {
+    try {
+      await analysisApi.saveVideoReq(videoId, token).then((response: any) => {
+        alert(response.data.detail);
+        return response.data;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const onSaveBtnClick = () => {
+    const userToken = "JWT " + localStorage.getItem("login-token")?.trim();
+    console.log(userToken);
+    if (userToken !== null) {
+      sendSaveRequeset(id, userToken);
+    } else console.log("동영상 저장 에러");
+  };
+
   return (
-    <div className="w-full flex flex-row  fixed top-0 items-baseline right-0 left-0 space-x-2 box-border p-3">
+    <div className="w-full flex flex-row justify-end fixed top-0 right-0 left-0 space-x-2 box-border p-3">
       <div className="flex-grow ml-3">
         <Logo />
       </div>
@@ -51,16 +75,17 @@ const HeaderMenu = () => {
             >
               로그인
             </button>
-            <Link to="register">
-              <button className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400">
-                회원가입
-              </button>
-            </Link>
           </div>
         )}
+        <button
+          className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400"
+          onClick={onSaveBtnClick}
+        >
+          저장하기
+        </button>
       </div>
     </div>
   );
 };
 
-export default HeaderMenu;
+export default AnalysisHeader;

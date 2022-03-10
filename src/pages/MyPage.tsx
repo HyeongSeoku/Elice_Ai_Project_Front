@@ -1,52 +1,43 @@
+import { MyPageProps } from "MyPageModule";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import commonApi from "../apis/commonApi";
 import Logo from "../components/Logo";
 import SearchBar from "../components/SearchBar";
 import VideoCard from "../components/VideoCard";
 
 const MyPage = () => {
-  //데이터 통신을 통해 받아올 데이터
-  const arr = [
-    {
-      videoUrl: "vvevev",
-      thumbnail: "testthumbnail",
-      owner: "testOwner",
-      title: "testTtitle",
-      hashTag: ["코딩", "프론트엔드", "React"],
-    },
-    {
-      videoUrl: "vvevev",
-      thumbnail: "testthumbnail",
-      owner: "testOwner",
-      title: "testTtitle",
-      hashTag: ["코딩", "데이터 분석", "Pandas"],
-    },
-    {
-      videoUrl: "vvevev",
-      thumbnail: "testthumbnail",
-      owner: "testOwner",
-      title: "testTtitle",
-      hashTag: ["인공지능", "Ai", "TensorFlow"],
-    },
-    {
-      videoUrl: "vvevev",
-      thumbnail: "testthumbnail",
-      owner: "testOwner",
-      title: "testTtitle",
-      hashTag: ["개발", "시스템 프로그래밍", "Window"],
-    },
-    {
-      videoUrl: "vvevev",
-      thumbnail: "testthumbnail",
-      owner: "testOwner",
-      title: "testTtitle",
-      hashTag: ["개발", "시스템 프로그래밍", "Window"],
-    },
-  ];
+  const [videoList, setVideoList] = useState<MyPageProps.myPageProps[]>([]);
+  useEffect(() => {
+    onComponentRendered();
+  }, []);
+
+  useEffect(() => {
+    console.log(videoList);
+  }, [videoList]);
+
+  const onComponentRendered = async () => {
+    const data = await getMyVideoList();
+    setVideoList(data);
+  };
+
+  const getMyVideoList = async () => {
+    const userToken = "JWT " + localStorage.getItem("login-token")?.trim();
+    console.log(userToken);
+    try {
+      return await commonApi.get_video_list(userToken).then((response: any) => {
+        console.log(response.data);
+        return response.data;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div className="container">
       <div
-        className="flex flex-row w-full box-border"
+        className="flex flex-row laptop:flex-col w-full box-border"
         style={{ height: "15%" }}
       >
         <div className="w-1/4">
@@ -56,12 +47,15 @@ const MyPage = () => {
         </div>
       </div>
       <div
-        className="w-full grid md:grid-cols1 justify-center items-center lg:grid-cols-2 xl:grid-cols-4"
+        className="w-full grid mobile:grid-cols1 justify-center items-center laptop:grid-cols-4"
         style={{ height: "70%" }}
       >
-        {arr.map((item) => (
-          <VideoCard videoObj={item} />
+        {videoList.map((item) => (
+          <VideoCard key={item.id} videoObj={item} />
         ))}
+        {/* {arr.map((item) => (
+          <VideoCard videoObj={item} />
+        ))} */}
       </div>
     </div>
   );

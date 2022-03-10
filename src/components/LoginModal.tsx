@@ -2,21 +2,18 @@ import Logo from "./Logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import commonApi from "../apis/commonApi";
-import { loginState } from "../atom";
-import { useRecoilState } from "recoil";
+import { loginState, modalState } from "../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-interface Props {
-  isModalOpen: boolean;
-  onModalBtnClick: () => void;
-}
-
-const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
+const LoginModal = () => {
   const [id, setId] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
+  const setIsModalOpen = useSetRecoilState(modalState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -24,6 +21,10 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
 
   const onPwdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPwd(e.target.value);
+  };
+
+  const onModalBtnClick = () => {
+    setIsModalOpen((current) => !current);
   };
 
   const onSubmitLogin = () => {
@@ -52,13 +53,16 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
           if (response.status === 200) {
             alert("로그인 성공!");
             setIsLoggedIn(true); //로그인 상태 변경
+            console.log(response.data.access);
+            localStorage.setItem("login-token", response.data.access);
+            localStorage.setItem("token-validity", response.data.refresh);
             onModalBtnClick(); //모달 닫기
           }
         });
     } catch (e) {
       const failMsg = window.confirm("유저 정보가 없습니다. 가입하시겠습니까?");
       if (failMsg) {
-        navigate("/regist", { replace: true });
+        navigate("/register", { replace: true });
       } else {
         return;
       }
@@ -76,6 +80,11 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
     return regExp.test(asValue);
   }
+
+  const onRegisterBtnClick = () => {
+    location.pathname = "/";
+    navigate("/register");
+  };
   return (
     <div className="flex flex-col justify-center items-center z-10 fixed top-0 right-0 left-0 bottom-0  bg-slate-600 bg-opacity-75">
       <div className="py-10 px-10 flex flex-col justify-center items-center rounded-lg bg-slate-50 z-50  box-border">
@@ -103,7 +112,13 @@ const LoginModal = ({ isModalOpen, onModalBtnClick }: Props) => {
           />
         </div>
         <div className="w-full flex justify-center items-center space-x-2 mt-10 mb-1">
-          <button className="bg-blue-200 py-2 px-5 rounded-xl">회원가입</button>
+          <button
+            className="bg-blue-200 py-2 px-5 rounded-xl"
+            onClick={onRegisterBtnClick}
+          >
+            회원가입
+          </button>
+
           <button
             className="bg-green-200 py-2 px-5 rounded-xl"
             onClick={onSubmitLogin}

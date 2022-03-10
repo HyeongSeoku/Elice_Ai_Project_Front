@@ -7,5 +7,5 @@
 }
 
 .videoContentsRowContainer {
-  @apply flex flex-row justify-start space-x-2 mt-1 box-border p-1 flex-grow;
+  @apply flex flex-row laptop:flex-col justify-start space-x-2 mt-1 box-border p-1 flex-grow;
 }

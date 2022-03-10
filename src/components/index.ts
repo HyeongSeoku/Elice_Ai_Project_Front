@@ -4,3 +4,6 @@ export { default as Logo } from "./Logo";
 export { default as VideoCard } from "./VideoCard";
 export { default as LoadingModal } from "./LoadingModal";
 export { default as ScriptItem } from "./AnalysisScriptItem";
+export { default as KeyWord } from "./AnalysisKeyword";
+export { default as UserInfo } from "./UserInfo";
+export { default as AnalysisHeader } from "./AnalysisHeader";

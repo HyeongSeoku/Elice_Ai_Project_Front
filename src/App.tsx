@@ -12,8 +12,8 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/mypage" element={<MyPage />} />
-      <Route path="analysis" element={<VideoAnalysis />} />
-      <Route path="regist" element={<Regist />} />
+      <Route path="/analysis" element={<VideoAnalysis />} />
+      <Route path="/register" element={<Regist />} />
     </Routes>
   );
 }

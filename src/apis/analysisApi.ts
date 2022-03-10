@@ -18,11 +18,13 @@ const getApi = async (url: string) => {
   }
 };
 
-const postApi = async (url: string, data: any) => {
-  const result = await axios.post(url, data);
+const postApi = async (url: string, data: any, headers?: any) => {
+  const result = await axios.post(url, data, headers);
   switch (result.status) {
-    case 200: case 201:
+    case 200:
+    case 201:
       return result;
+    case 401:
     case 404:
       console.error("데이터가 없습니다.");
       return false;
@@ -40,6 +42,13 @@ const analysisApi = {
   },
   getVideoId: async (videoUrl: any) => {
     return await postApi(`${API_END_POINT}/videos/`, videoUrl);
+  },
+  saveVideoReq: async (videoId: any, token: any) => {
+    return await postApi(
+      `${API_END_POINT}/videos/${videoId}/`,
+      { video_id: videoId },
+      { headers: { Authorization: token } }
+    );
   },
 };
 

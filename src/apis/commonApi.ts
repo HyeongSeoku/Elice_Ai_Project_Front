@@ -5,6 +5,7 @@ const postApi = async (url: string, data: any) => {
   const result = await axios.post(url, data);
   switch (result.status) {
     case 200:
+    case 201:
       return result;
     case 404:
       console.error("데이터가 없습니다.");
@@ -17,10 +18,11 @@ const postApi = async (url: string, data: any) => {
   }
 };
 
-const getApi = async (url: string) => {
-  const result = await axios.get(url);
+const getApi = async (url: string, headers?: any) => {
+  const result = await axios.get(url, headers);
   switch (result.status) {
     case 200:
+    case 201:
       return result;
     case 404:
       console.error("데이터가 없습니다.");
@@ -42,6 +44,11 @@ const commonApi = {
   },
   send_logout: async (user: any) => {
     return await postApi(`${API_END_POINT}/user/logout/`, user);
+  },
+  get_video_list: async (token: string) => {
+    return await getApi(`${API_END_POINT}/videos/list/`, {
+      headers: { Authorization: token },
+    });
   },
 };
 

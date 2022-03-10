@@ -3,7 +3,6 @@ interface Props {
 }
 
 const ScriptItem = ({ timeLine }: Props) => {
-  console.log(timeLine.timeStamp);
   return (
     <div className="flex flex-row mt-1 h-5 box-border">
       <div
