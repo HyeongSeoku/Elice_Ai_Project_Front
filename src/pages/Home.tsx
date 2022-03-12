@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { loginState, loginUser, modalState } from "../atom";
 import { LoadingModal } from "../components";
 import HeaderMenu from "../components/HeaderMenu";
 import LoginModal from "../components/LoginModal";
-import Logo from "../components/Logo";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../components/SearchBar";
 import MainLayout from "../components/layout/MainLayout";
 
 import searchMainSrc from "../img/hash_main/titleColor2.png";
 import youtubeMainSrc from "../img/hash_main/youtubeBlack.png";
 import getSearchMainSrc from "../img/hash_main/getSearch_color.png";
+import scrollMainSrc from "../img/hash_main/scroll_black.png";
+import startSearchMainSrc from "../img/hash_main/green_search.png";
 
 import intro1_1 from "../img/hash/page1-1.png";
 import intro1_2 from "../img/hash/page1-2.png";
@@ -40,8 +42,10 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
 
+  const searchRef = useRef<HTMLDivElement>(null);
+
   function onScroll() {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     setScrollPosition(window.scrollY);
   }
 
@@ -57,45 +61,86 @@ const Home = () => {
     setIsLoading((current) => !current);
   };
 
+  const moveToSearchBar = () => {
+    searchRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="  mx-auto p-5  overflow-scroll">
+    <div className="mx-auto p-5  overflow-scroll box-border">
       <HeaderMenu />
       <section
         className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden"
         style={{ width: "100%", height: "100vh" }}
       >
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center mt-auto">
           <img src={youtubeMainSrc} className="w-96" />
         </div>
         <div className="flex justify-center items-center">
           <img src={getSearchMainSrc} className="w-96" />
         </div>
-        <div className="mt-auto">
-          {/* <FontAwesomeIcon icon="fa-solid fa-angle-down" /> */}
-          아래로!(아이콘 미해결)
+        <div className="flex justify-center items-center mt-auto opacity-70">
+          <img src={scrollMainSrc} className="w-48" />
         </div>
-        <div
-          className="flex justify-center items-center"
-          style={{
-            opacity: (scrollPosition - 120.5) / 20,
-          }}
-        >
-          <img src={intro1_2} className="w-80" />
-        </div>
-        <div
-          className="flex justify-center items-center"
-          style={{
-            opacity: (scrollPosition - 122.5) / 20,
-          }}
-        >
-          <img src={intro1_3} className="w-80" />
+        <div className="mt-10 text-5xl font-bold text-center angleDown mb-10">
+          <FontAwesomeIcon icon={faAngleDown} onClick={moveToSearchBar} />
+          <img
+            className="invisible w-60 downMsg mt-4"
+            src={startSearchMainSrc}
+          />
         </div>
       </section>
       <section
-        className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden"
+        className="flex flex-col justify-center items-center mx-auto p-5 text-center overflow-hidden youtubeSection"
+        style={{
+          width: "100%",
+          height: "100vh",
+          opacity: (scrollPosition - 280.5) / 200,
+        }}
+      >
+        <div className="flex justify-center items-center">
+          <img
+            src={intro1_1}
+            className="w-80"
+            style={{ opacity: (scrollPosition - 410) / 200 }}
+          />
+        </div>
+        <div className="flex justify-center items-center mt-10">
+          <img
+            src={intro1_2}
+            className="w-80"
+            style={{ opacity: (scrollPosition - 530) / 200 }}
+          />
+        </div>
+        <div className="flex justify-center items-center mt-5">
+          <img
+            src={intro1_3}
+            className="w-80"
+            style={{ opacity: (scrollPosition - 580) / 200 }}
+          />
+        </div>
+      </section>
+      <section
+        className="flex flex-col justify-center items-center mx-auto p-5 text-center overflow-hidden searchSection "
+        style={{
+          width: "100%",
+          height: "100vh",
+          opacity: (scrollPosition - 1210) / 200,
+        }}
+      >
+        <div className="flex justify-center items-center">
+          <div
+            className="text-3xl font-bold"
+            style={{ opacity: (scrollPosition - 1400) / 200 }}
+          >
+            원하는 유튜브 영상의 URL을 검색
+          </div>
+        </div>
+      </section>
+      <section
+        className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden "
         style={{ width: "100%", height: "100vh" }}
       >
-        <div className="font-bold text-4xl mb-5">
+        <div className="font-bold text-4xl mb-5" ref={searchRef}>
           한번의 검색으로 핵심을 알아보세요
         </div>
         <SearchBar

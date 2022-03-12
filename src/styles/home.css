@@ -1,0 +1,40 @@
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0.2;
+    transform: translateY(15px);
+  }
+}
+
+.angleDown {
+  animation: fadeOutDown 1s 0.7s infinite linear alternate;
+}
+
+.angleDown:hover > .downMsg {
+  visibility: visible;
+}
+
+.youtubeSection {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url(../img/youtube_background.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+.searchSection {
+  background-image: linear-gradient(
+      rgba(255, 139, 71, 0.8),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url(../img/search_background.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: top;
+}
