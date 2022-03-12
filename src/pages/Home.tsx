@@ -71,7 +71,8 @@ const Home = () => {
           <img src={getSearchMainSrc} className="w-96" />
         </div>
         <div className="mt-auto">
-          <FontAwesomeIcon icon="fa-solid fa-angle-down" />
+          {/* <FontAwesomeIcon icon="fa-solid fa-angle-down" /> */}
+          아래로!(아이콘 미해결)
         </div>
         <div
           className="flex justify-center items-center"
