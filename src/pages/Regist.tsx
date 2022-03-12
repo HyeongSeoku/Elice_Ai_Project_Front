@@ -123,9 +123,14 @@ const Regist = () => {
     return regExp.test(asValue);
   }
 
+  const onBackBtnClick = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="container">
       <h1>회원가입 페이지</h1>
+      <button onClick={onBackBtnClick}>뒤로가기</button>
       <section className="w-full h-full flex flex-col justify-center items-center">
         <form onSubmit={onSubmitRegist}>
           <div className="flex flex-row items-baseline space-x-2">
