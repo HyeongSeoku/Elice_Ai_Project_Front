@@ -4,6 +4,7 @@ import "./App.css";
 import LoginModal from "./components/LoginModal";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
+import NotFoundErrorPage from "./pages/NotFoundErrorPage";
 import Regist from "./pages/Regist";
 import VideoAnalysis from "./pages/VideoAnalysis";
 
@@ -14,6 +15,7 @@ function App(): JSX.Element {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/analysis" element={<VideoAnalysis />} />
       <Route path="/register" element={<Regist />} />
+      <Route path={"*"} element={<NotFoundErrorPage />} />
     </Routes>
   );
 }
