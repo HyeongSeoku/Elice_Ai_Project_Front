@@ -37,7 +37,7 @@ const MyPage = () => {
   return (
     <div className="container">
       <div
-        className="flex flex-row laptop:flex-col w-full box-border"
+        className="flex flex-row laptop:flex-col w-full box-border flex-wrap"
         style={{ height: "15%" }}
       >
         <div className="w-1/4">
@@ -47,7 +47,7 @@ const MyPage = () => {
         </div>
       </div>
       <div
-        className="w-full grid mobile:grid-cols1 justify-center items-center laptop:grid-cols-4 laptop:gap-x-10	"
+        className="w-full grid mobile:grid-cols1 justify-center items-center laptop:grid-cols-4 "
         style={{ height: "70%" }}
       >
         {videoList.map((item) => (

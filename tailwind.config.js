@@ -12,7 +12,12 @@ module.exports = {
       desktop: "1280px",
       // => @media (min-width: 1280px) { ... }
     },
-    extend: {},
+
+    extend: {
+      backgroundImage: {
+        youtube_bg: "url('/src/img/youtube_background.png')",
+      },
+    },
   },
   plugins: [],
 };
