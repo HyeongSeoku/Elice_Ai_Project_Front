@@ -45,6 +45,19 @@ const SearchBar = ({
         ? await getVideoId(urlStr, userToken)
         : await getVideoId(urlStr);
 
+      if (videoId === 400) {
+        alert("지원하지 않는 비디오입니다.");
+        onChangeLoadingState();
+        setSearchWord("");
+        return;
+      }
+      if (videoId === 502) {
+        alert("응답이 너무 오래걸립니다. 다시 시도해주세요.");
+        onChangeLoadingState();
+        setSearchWord("");
+        return;
+      }
+
       const videoDetail = await getDetailInfoVideo(videoId);
 
       onChangeLoadingState();
@@ -80,27 +93,22 @@ const SearchBar = ({
       const videoId = await analysisApi
         .getVideoId(text, token)
         .then((response: any) => {
-          if (response.status === 400) console.log(response);
+          console.log("api 성공");
 
-          console.log("api 요청 성공");
           return response.data.video_id;
         });
       return videoId;
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      console.error(e.response);
+      return e.response.status;
     }
   };
 
   //리턴 받은 비디오 아이디를 통해 비디오 세부 디테일을 받아오는 메소드 2번함수
-  const getDetailInfoVideo = async (videoId: number) => {
+  const getDetailInfoVideo = async (videoId: any) => {
     try {
       return await analysisApi.getVideoDetail(videoId).then((response: any) => {
         return response.data;
-        // setTimeout(() => {
-        //   onChangeLoadingState();
-        //   setSearchWord("");
-        //   navigate("/analysis", { state: { analyzedVideo: tmpData } });
-        // }, 2000);
       });
     } catch (e) {
       console.error(e);
