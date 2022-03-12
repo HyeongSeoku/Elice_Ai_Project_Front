@@ -4,7 +4,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import commonApi from "../apis/commonApi";
-import { loginState, modalState } from "../atom";
+import { loginState, loginUser, modalState } from "../atom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 const LoginModal = () => {
@@ -12,6 +12,8 @@ const LoginModal = () => {
   const [pwd, setPwd] = useState<string>("");
   const setIsModalOpen = useSetRecoilState(modalState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
+  const [userName, setUserName] = useRecoilState<string>(loginUser);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -51,9 +53,8 @@ const LoginModal = () => {
         .send_login({ user_ID: id, password: pwd })
         .then((response: any) => {
           if (response.status === 200) {
-            alert("로그인 성공!");
             setIsLoggedIn(true); //로그인 상태 변경
-            console.log(response.data.access);
+            setUserName(response.data.user_ID);
             localStorage.setItem("login-token", response.data.access);
             localStorage.setItem("token-validity", response.data.refresh);
             onModalBtnClick(); //모달 닫기
