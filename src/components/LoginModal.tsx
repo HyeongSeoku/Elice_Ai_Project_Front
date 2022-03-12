@@ -92,8 +92,11 @@ const LoginModal = () => {
   return (
     <div className="flex flex-col justify-center items-center z-10 fixed top-0 right-0 left-0 bottom-0  bg-slate-600 bg-opacity-75">
       <div className="py-10 px-10 flex flex-col justify-center items-center rounded-lg bg-slate-50 z-50  box-border">
-        <div className="ml-auto mb-4">
-          <FontAwesomeIcon icon={faX} onClick={onModalBtnClick} />
+        <div
+          className="ml-auto mb-4 hover:bg-slate-400 cursor-pointer box-border p-4 rounded-md"
+          onClick={onModalBtnClick}
+        >
+          <FontAwesomeIcon icon={faX} />
         </div>
         <Logo />
         <div className="flex flex-row items-baseline justify-center space-x-2">
