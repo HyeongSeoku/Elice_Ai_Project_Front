@@ -1,15 +1,9 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { RecoilProps } from "RecoilModule";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Logo, UserInfo } from ".";
-import { loginState, modalState } from "../atom";
+import { loginState, loginUser, modalState } from "../atom";
 
-interface Props {
-  scroll: number;
-}
-
-const HeaderMenu = ({ scroll }: Props) => {
+const HeaderMenu = () => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(modalState);
 
@@ -29,18 +23,13 @@ const HeaderMenu = ({ scroll }: Props) => {
   };
 
   return (
-    <div
-      className="flex flex-row fixed top-0 right-0 left-0 z-10 space-x-2 box-border p-3"
-      style={{
-        backgroundColor: scroll !== 0 ? "rgba(0, 0, 0, 0.2);" : "rgba(0,0,0,0)",
-      }}
-    >
+    <div className="flex flex-row fixed top-0 right-0 left-0 z-10 space-x-2 box-border p-3">
       <div className="flex-grow ml-3">
         <Logo />
       </div>
       <div className="flex felx-row justify-end items-baseline flex-grow mt-5 ">
         {isLoggedIn && (
-          <div className="flex space-x-2 ">
+          <div className="flex space-x-2">
             <Link to="/mypage">
               <UserInfo />
             </Link>

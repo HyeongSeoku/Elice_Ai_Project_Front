@@ -49,11 +49,11 @@ const AnalysisHeader = ({ id }: Props) => {
   };
 
   return (
-    <div className="w-full flex flex-row justify-end fixed top-0 right-0 left-0 space-x-2 box-border p-3">
+    <div className="flex flex-row justify-end fixed top-0 right-0 left-0 space-x-2 z-10  box-border p-3">
       <div className="flex-grow ml-3">
         <Logo />
       </div>
-      <div className="flex felx-row justify-end flex-grow">
+      <div className="flex felx-row justify-end items-baseline flex-grow mt-5">
         {isLoggedIn && (
           <div className="flex space-x-2 ">
             <Link to="/mypage">
@@ -78,7 +78,7 @@ const AnalysisHeader = ({ id }: Props) => {
           </div>
         )}
         <button
-          className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400"
+          className="bg-blue-200 py-2 px-5 rounded-xl ml-2 hover:bg-blue-400"
           onClick={onSaveBtnClick}
         >
           저장하기
