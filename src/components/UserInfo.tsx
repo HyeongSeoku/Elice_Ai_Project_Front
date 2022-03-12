@@ -9,7 +9,7 @@ const UserInfo = () => {
       <div className="bg-slate-400 w-auto h-10 rounded-3xl text-center">
         {userName}
       </div>
-      <div>마이페이지</div>
+      <div className="font-light text-sm">마이페이지</div>
     </div>
   );
 };
