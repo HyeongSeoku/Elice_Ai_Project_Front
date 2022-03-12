@@ -10,3 +10,8 @@ export const modalState = atom<boolean>({
   key: "modalState",
   default: false,
 });
+
+export const loginUser = atom<string>({
+  key: "loginUser",
+  default: "",
+});
