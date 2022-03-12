@@ -47,7 +47,7 @@ const MyPage = () => {
         </div>
       </div>
       <div
-        className="w-full grid mobile:grid-cols1 justify-center items-center laptop:grid-cols-4"
+        className="w-full grid mobile:grid-cols1 justify-center items-center laptop:grid-cols-4 laptop:gap-x-10	"
         style={{ height: "70%" }}
       >
         {videoList.map((item) => (

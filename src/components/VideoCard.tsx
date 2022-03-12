@@ -2,7 +2,7 @@ import { VideoCardTypes } from "VideoCardModule";
 
 const VideoCard = ({ videoObj }: VideoCardTypes.videoCardProps) => {
   return (
-    <div className="videoCardContainer hover:scale-105 hover:shadow-2xl">
+    <div className="videoCardContainer hover:scale-105 hover:shadow-2xl ">
       <div className="w-full h-auto flex flex-col" style={{ flexGrow: 1 }}>
         <div className="videoContentsRowContainer">
           <div className="bg-black rounded-full w-full h-auto">
