@@ -1,6 +1,7 @@
 import { MyPageProps } from "MyPageModule";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import analysisApi from "../apis/analysisApi";
 import commonApi from "../apis/commonApi";
 import Logo from "../components/Logo";
 import SearchBar from "../components/SearchBar";
@@ -34,8 +35,19 @@ const MyPage = () => {
     }
   };
 
+  //리턴 받은 비디오 아이디를 통해 비디오 세부 디테일을 받아오는 메소드 2번함수
+  const getDetailInfoVideo = async (videoId: any) => {
+    try {
+      return await analysisApi.getVideoDetail(videoId).then((response: any) => {
+        return response.data;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
-    <div className="container">
+    <div className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll bg-emerald-200">
       <div
         className="flex flex-row laptop:flex-col w-full box-border flex-wrap"
         style={{ height: "15%" }}
@@ -51,11 +63,12 @@ const MyPage = () => {
         style={{ height: "70%" }}
       >
         {videoList.map((item) => (
-          <VideoCard key={item.id} videoObj={item} />
+          <VideoCard
+            key={item.id}
+            videoObj={item}
+            getVideoDetail={getDetailInfoVideo}
+          />
         ))}
-        {/* {arr.map((item) => (
-          <VideoCard videoObj={item} />
-        ))} */}
       </div>
     </div>
   );
