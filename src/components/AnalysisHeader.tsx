@@ -60,7 +60,7 @@ const AnalysisHeader = ({ id }: Props) => {
               <UserInfo />
             </Link>
             <button
-              className="bg-red-200 py-2 px-5 rounded-xl hover:bg-red-400"
+              className="bg-red-200 py-2 px-5 rounded-xl hover:bg-red-400 h-10"
               onClick={onChangeLoginState}
             >
               로그아웃
@@ -70,7 +70,7 @@ const AnalysisHeader = ({ id }: Props) => {
         {!isLoggedIn && (
           <div className="flex space-x-2 ">
             <button
-              className="bg-green-200 py-2 px-5 rounded-xl hover:bg-green-400"
+              className="bg-green-200 py-2 px-5 rounded-xl hover:bg-green-400 h-10"
               onClick={onModalChange}
             >
               로그인
@@ -78,7 +78,7 @@ const AnalysisHeader = ({ id }: Props) => {
           </div>
         )}
         <button
-          className="bg-blue-200 py-2 px-5 rounded-xl ml-2 hover:bg-blue-400"
+          className="bg-blue-200 py-2 px-5 rounded-xl ml-2 hover:bg-blue-400 h-10"
           onClick={onSaveBtnClick}
         >
           저장하기

@@ -34,7 +34,7 @@ const HeaderMenu = () => {
               <UserInfo />
             </Link>
             <button
-              className="bg-red-200 py-2 px-5 rounded-xl hover:bg-red-400"
+              className="bg-red-200 py-2 px-5 rounded-xl hover:bg-red-400 h-10"
               onClick={onChangeLoginState}
             >
               로그아웃
@@ -44,13 +44,13 @@ const HeaderMenu = () => {
         {!isLoggedIn && (
           <div className="flex space-x-2 ">
             <button
-              className="bg-green-200 py-2 px-5 rounded-xl hover:bg-green-400"
+              className="bg-green-200 py-2 px-5 rounded-xl hover:bg-green-400 h-10"
               onClick={onModalChange}
             >
               로그인
             </button>
             <Link to="register">
-              <button className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400">
+              <button className="bg-blue-200 py-2 px-5 rounded-xl hover:bg-blue-400 h-10">
                 회원가입
               </button>
             </Link>
