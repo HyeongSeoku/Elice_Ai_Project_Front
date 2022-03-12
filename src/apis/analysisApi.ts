@@ -30,7 +30,7 @@ const postApi = async (url: string, data: any, headers?: any) => {
     case 401:
     case 404:
       console.error("데이터가 없습니다.");
-      return false;
+      return result;
     case 500:
       console.error("Internal Error");
       return false;
