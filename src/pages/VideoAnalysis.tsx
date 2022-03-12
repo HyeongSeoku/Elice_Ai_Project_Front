@@ -129,8 +129,8 @@ const VideoAnalysis = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="flex flex-row" style={{ width: "50%", height: "20%" }}>
-          <div className="flex-grow">
+        <div className="flex flex-row" style={{ width: "50%", height: "30%" }}>
+          <div className="flex-grow overflow-scroll mb-10">
             {timeStampContents.map((item) => (
               <ScriptItem key={item.timeStamp} timeLine={item} />
             ))}
