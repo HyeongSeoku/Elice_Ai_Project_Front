@@ -17,6 +17,7 @@ declare module "VideoCardModule" {
         user_id: string | null;
         youtube_slug: string;
       };
+      getVideoDetail: (videoId: any) => Promise<any>;
     }
   }
 }
