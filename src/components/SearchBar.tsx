@@ -4,12 +4,15 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { SearchTypes } from "SearchModule";
 import { useNavigate } from "react-router-dom";
 import analysisApi from "../apis/analysisApi";
+import { useRecoilValue } from "recoil";
+import { loginState } from "../atom";
 
 const SearchBar = ({
   isLoading,
   onChangeLoadingState,
 }: SearchTypes.searchProps) => {
   const [searchWord, setSearchWord] = useState<string>("");
+  const isLoggedIn = useRecoilValue(loginState);
   const navigate = useNavigate();
 
   const onSearchWordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,12 +30,21 @@ const SearchBar = ({
   //3.분석이 불가능할 경우
   const onSubmitSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const urlValid = isYoutubeUrl(searchWord);
+    if (!urlValid) {
+      alert("유튜브 url만 가능해요.");
+      return;
+    }
     //문자열에서 유튜브 영상의 아이디값 저장
     const urlStr: string = getUrlId(searchWord);
     //데이터 분석 요청 메소드 (비동기 처리)
     if (!isLoading && urlStr !== "error") {
       onChangeLoadingState();
-      const videoId = await getVideoId(urlStr);
+      const userToken = "JWT " + localStorage.getItem("login-token")?.trim();
+      const videoId = isLoggedIn
+        ? await getVideoId(urlStr, userToken)
+        : await getVideoId(urlStr);
+
       const videoDetail = await getDetailInfoVideo(videoId);
 
       onChangeLoadingState();
@@ -63,11 +75,13 @@ const SearchBar = ({
   };
 
   //분석 요청시 가장 처음 실행되는 메소드 1번 함수
-  const getVideoId = async (text: string) => {
+  const getVideoId = async (text: string, token?: string) => {
     try {
       const videoId = await analysisApi
-        .getVideoId({ youtube_slug: text })
+        .getVideoId(text, token)
         .then((response: any) => {
+          if (response.status === 400) console.log(response);
+
           console.log("api 요청 성공");
           return response.data.video_id;
         });
@@ -81,7 +95,6 @@ const SearchBar = ({
   const getDetailInfoVideo = async (videoId: number) => {
     try {
       return await analysisApi.getVideoDetail(videoId).then((response: any) => {
-        console.log(response.data);
         return response.data;
         // setTimeout(() => {
         //   onChangeLoadingState();
@@ -94,6 +107,12 @@ const SearchBar = ({
     }
   };
 
+  const isYoutubeUrl = (asValue: string) => {
+    var regExp =
+      /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm;
+    return regExp.test(asValue);
+  };
+
   return (
     <div className="box-border flex items-baseline h-16 p-2 w-100 laptop:w-1/3 rounded-2xl bg-slate-300 focus:bg-slate-400 ">
       <FontAwesomeIcon icon={faSearch} className="flex-grow-0 ml-2 text-lg" />
@@ -102,6 +121,7 @@ const SearchBar = ({
           className="box-border w-full h-full p-3 ml-2 text-lg grow rounded-2xl bg-inherit focus:outline-none"
           value={searchWord}
           onChange={onSearchWordChange}
+          placeholder="URL을 입력해주세요."
         />
       </form>
     </div>

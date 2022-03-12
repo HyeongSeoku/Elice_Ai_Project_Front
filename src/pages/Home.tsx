@@ -8,6 +8,25 @@ import LoginModal from "../components/LoginModal";
 import Logo from "../components/Logo";
 import SearchBar from "../components/SearchBar";
 import MainLayout from "../components/layout/MainLayout";
+import intro1_1 from "../img/hash/page1-1.png";
+import intro1_2 from "../img/hash/page1-2.png";
+import intro1_3 from "../img/hash/page1-3.png";
+
+import intro2_1 from "../img/hash/page2-1.png";
+import intro2_2 from "../img/hash/page2-2.png";
+
+import intro3 from "../img/hash/page3.png";
+import intro4 from "../img/hash/page4.png";
+import intro5_1 from "../img/hash/page5-1.png";
+import intro5_2 from "../img/hash/page5-2.png";
+import intro5_3 from "../img/hash/page5-3.png";
+import intro5_4 from "../img/hash/page5-4.png";
+
+import intro6 from "../img/hash/page6.png";
+import intro7_1 from "../img/hash/page7-1.png";
+import intro7_2 from "../img/hash/page7-2.png";
+import intro7_3 from "../img/hash/page7-3.png";
+import intro7_4 from "../img/hash/page7-4.png";
 
 const Home = () => {
   const isModalOpen = useRecoilValue(modalState);
@@ -34,7 +53,7 @@ const Home = () => {
 
   return (
     <div className="  mx-auto p-5  overflow-scroll">
-      <HeaderMenu />
+      <HeaderMenu scroll={scrollPosition} />
       <section
         className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden relative"
         style={{ width: "100%", height: "100vh" }}
@@ -46,25 +65,35 @@ const Home = () => {
           isLoading={isLoading}
           onChangeLoadingState={onChangeLoadingState}
         />
-        <div className="font-bold text-3xl mb-5">중요 해시</div>
         {isModalOpen && <LoginModal />}
         {isLoading && <LoadingModal />}
       </section>
-      <section className="flex flex-row justify-center items-center">
+      <section>
         <div
-          className="text-blue-300 font-bold text-2xl"
+          className="flex justify-center items-center"
           style={{
-            width: "500px",
+            opacity: (scrollPosition - 100.5) / 10,
           }}
         >
-          <div>우리와 너무나도 밀접해진 영상 미디어들,</div>
-          <div>바쁜 사회 속 아끼는 방법을 한가지 더 해보세요.</div>
+          <img src={intro1_1} className="w-64" />
+        </div>
+        <div
+          className="flex justify-center items-center"
+          style={{
+            opacity: (scrollPosition - 120.5) / 20,
+          }}
+        >
+          <img src={intro1_2} className="w-72" />
+        </div>
+        <div
+          className="flex justify-center items-center"
+          style={{
+            opacity: (scrollPosition - 122.5) / 20,
+          }}
+        >
+          <img src={intro1_3} className="w-64" />
         </div>
       </section>
-
-      <div className="text-purple-300 font-bold text-2xl">
-        주소와 검색 한번이면 완료.
-      </div>
     </div>
   );
 };

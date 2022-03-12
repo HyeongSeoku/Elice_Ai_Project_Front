@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import LogoImg from "../img/elice_ai_logo.png";
+import LogoImg from "../img/hash/logo.png";
 
 const Logo = () => {
   const navigate = useNavigate();

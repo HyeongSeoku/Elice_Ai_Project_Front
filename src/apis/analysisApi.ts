@@ -1,13 +1,15 @@
 import axios from "axios";
 import { API_END_POINT } from "../constants/standard";
 
-const getApi = async (url: string) => {
-  const result = await axios.get(url);
+const getApi = async (url: string, headers?: any) => {
+  const result = await axios.get(url, headers);
   switch (result.status) {
     case 200:
       return result;
+    case 400:
     case 404:
       console.error("데이터가 없습니다.");
+
       //TODO : throw new Error() 방식 사용
       return false;
     case 500:
@@ -24,6 +26,7 @@ const postApi = async (url: string, data: any, headers?: any) => {
     case 200:
     case 201:
       return result;
+    case 400:
     case 401:
     case 404:
       console.error("데이터가 없습니다.");
@@ -40,8 +43,12 @@ const analysisApi = {
   getVideoDetail: async (videoId: any) => {
     return await getApi(`${API_END_POINT}/videos/${videoId}/`);
   },
-  getVideoId: async (videoUrl: any) => {
-    return await postApi(`${API_END_POINT}/videos/`, videoUrl);
+  getVideoId: async (videoUrl: string, token?: string) => {
+    return await postApi(
+      `${API_END_POINT}/videos/`,
+      { youtube_slug: videoUrl },
+      { headers: { Authorization: token } }
+    );
   },
   saveVideoReq: async (videoId: any, token: any) => {
     return await postApi(

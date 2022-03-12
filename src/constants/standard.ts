@@ -4,4 +4,4 @@ export const PWD_MIN_LENGTH = 8;
 export const PWD_MAX_LENGTH = 16;
 
 export const API_END_POINT =
-  "http://elice-kdt-ai-3rd-team05.koreacentral.cloudapp.azure.com";
+  "http://elice-kdt-ai-3rd-team05.koreacentral.cloudapp.azure.com/api";
