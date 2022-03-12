@@ -114,16 +114,26 @@ const SearchBar = ({
   };
 
   return (
-    <div className="box-border flex items-baseline h-16 p-2 w-100 laptop:w-1/3 rounded-2xl bg-slate-300 focus:bg-slate-400 ">
-      <FontAwesomeIcon icon={faSearch} className="flex-grow-0 ml-2 text-lg" />
-      <form className="w-full" onSubmit={onSubmitSearch}>
-        <input
-          className="box-border w-full h-full p-3 ml-2 text-lg grow rounded-2xl bg-inherit focus:outline-none"
-          value={searchWord}
-          onChange={onSearchWordChange}
-          placeholder="URL을 입력해주세요."
-        />
-      </form>
+    <div className="w-full flex flex-col justify-center items-center">
+      <div className="box-border flex items-baseline h-16 p-2 w-100 laptop:w-1/3 rounded-2xl bg-slate-300 focus:bg-slate-400 ">
+        <FontAwesomeIcon icon={faSearch} className="flex-grow-0 ml-2 text-lg" />
+        <form className="w-full" onSubmit={onSubmitSearch}>
+          <input
+            className="box-border w-full h-full p-3 ml-2 text-lg grow rounded-2xl bg-inherit focus:outline-none"
+            value={searchWord}
+            onChange={onSearchWordChange}
+            placeholder="URL을 입력해주세요."
+          />
+        </form>
+      </div>
+      {searchWord !== "" && (
+        <button
+          className="bg-green-400 box-border p-3 rounded-md hover:bg-green-600 mt-2"
+          onClick={onSubmitSearch}
+        >
+          검색하기
+        </button>
+      )}
     </div>
   );
 };
