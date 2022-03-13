@@ -47,7 +47,7 @@ const MyPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll bg-emerald-200">
+    <div id="myPageReal" className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll bg-emerald-200">
       <div
         className="flex flex-row laptop:flex-col w-full box-border flex-wrap"
         style={{ height: "15%" }}
