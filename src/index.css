@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("./styles/myPage.css");
+@import url("./styles/MyPage.css");
 @import url("./styles/common.css");
 @import url("./styles/loading.css");
 @import url("./styles/home.css");
@@ -9,4 +9,30 @@
 #root {
   width: 100vw;
   height: 100vh;
+}
+
+.overflow-scroll {
+  overflow: hidden;
+}
+
+#myLogo {
+  margin-bottom: 40px;
+}
+
+#userBtn {
+  padding: 10px;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+#myPageDesc {
+  text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+#myPageReal{
+  background-color: #FEEBB6;
+}
+
+#time-script{
+  overflow: scroll;
 }

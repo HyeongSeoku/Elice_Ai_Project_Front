@@ -66,7 +66,7 @@ const Home = () => {
   };
 
   return (
-    <div className="mx-auto p-5  overflow-scroll box-border">
+    <div className="mx-auto p-5  overflow-scroll box-border" style={ {padding: 0} }>
       <HeaderMenu />
       <section
         className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden"
@@ -141,7 +141,8 @@ const Home = () => {
         style={{ width: "100%", height: "100vh" }}
       >
         <div className="font-bold text-4xl mb-5" ref={searchRef}>
-          한번의 검색으로 핵심을 알아보세요
+        유튜브 URL 검색으로 <br />
+        영상 흐름과 중요 키워드를 알아보세요.
         </div>
         <SearchBar
           isLoading={isLoading}
@@ -149,10 +150,10 @@ const Home = () => {
         />
 
         <div className="text-slate-500 mt-3">
-          1시간 이내 유튜브 URL만 입력해주세요.
+          총 재생 시간이 1 시간 이내인 유튜브 동영상 URL만 입력해주세요.
         </div>
         <div className="text-slate-500 text-sm">
-          실시간 방송과 한국어 외 다른 언어의 영상은 지원하지 않습니다
+          실시간 방송, 한국어 외 다른 언어의 영상은 지원되지 않습니다.
         </div>
         {isModalOpen && <LoginModal />}
         {isLoading && <LoadingModal />}

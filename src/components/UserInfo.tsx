@@ -6,10 +6,10 @@ const UserInfo = () => {
 
   return (
     <div>
-      <div className="bg-slate-400 w-auto h-10 rounded-3xl text-center">
+      <div className="bg-slate-400 w-auto h-10 rounded-3xl text-center" id="userBtn">
         {userName}
       </div>
-      <div className="font-light text-sm">마이페이지</div>
+      <div className="font-light text-sm" id="myPageDesc" >마이페이지</div>
     </div>
   );
 };

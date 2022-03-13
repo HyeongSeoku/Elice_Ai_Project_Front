@@ -10,7 +10,7 @@ const Logo = () => {
 
   return (
     <div onClick={onClickHome}>
-      <img className="w-auto h-16 laptop:h-20 m-0" src={LogoImg} />
+      <img className="w-auto h-16 laptop:h-20 m-0" id="myLogo" src={LogoImg} />
     </div>
   );
 };
