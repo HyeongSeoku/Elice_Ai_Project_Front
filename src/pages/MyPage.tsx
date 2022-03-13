@@ -13,10 +13,6 @@ const MyPage = () => {
     onComponentRendered();
   }, []);
 
-  useEffect(() => {
-    console.log(videoList);
-  }, [videoList]);
-
   const onComponentRendered = async () => {
     const data = await getMyVideoList();
     setVideoList(data);
@@ -24,10 +20,8 @@ const MyPage = () => {
 
   const getMyVideoList = async () => {
     const userToken = "JWT " + localStorage.getItem("login-token")?.trim();
-    console.log(userToken);
     try {
       return await commonApi.get_video_list(userToken).then((response: any) => {
-        console.log(response.data);
         return response.data;
       });
     } catch (e) {
@@ -47,7 +41,10 @@ const MyPage = () => {
   };
 
   return (
-    <div id="myPageReal" className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll bg-emerald-200">
+    <div
+      id="myPageReal"
+      className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll bg-emerald-200"
+    >
       <div
         className="flex flex-row laptop:flex-col w-full box-border flex-wrap"
         style={{ height: "15%" }}

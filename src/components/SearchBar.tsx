@@ -107,8 +107,6 @@ const SearchBar = ({
       const videoId = await analysisApi
         .getVideoId(text, token)
         .then((response: any) => {
-          console.log("api 성공");
-
           return response.data.video_id;
         });
       return videoId;

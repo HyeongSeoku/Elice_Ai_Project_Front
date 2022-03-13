@@ -45,7 +45,6 @@ const Home = () => {
   const searchRef = useRef<HTMLDivElement>(null);
 
   function onScroll() {
-    // console.log(window.scrollY);
     setScrollPosition(window.scrollY);
   }
 
@@ -66,7 +65,11 @@ const Home = () => {
   };
 
   return (
-    <div id="hidden-scroll-page" className="mx-auto p-5  overflow-scroll box-border" style={ {padding: 0} }>
+    <div
+      id="hidden-scroll-page"
+      className="mx-auto p-5  overflow-scroll box-border"
+      style={{ padding: 0 }}
+    >
       <HeaderMenu />
       <section
         className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden"
@@ -141,8 +144,8 @@ const Home = () => {
         style={{ width: "100%", height: "100vh" }}
       >
         <div className="font-bold text-4xl mb-5" ref={searchRef}>
-        유튜브 URL 검색으로 <br />
-        영상 흐름과 중요 키워드를 알아보세요.
+          유튜브 URL 검색으로 <br />
+          영상 흐름과 중요 키워드를 알아보세요.
         </div>
         <SearchBar
           isLoading={isLoading}

@@ -12,7 +12,6 @@ interface Props {
 const AnalysisHeader = ({ id }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(loginState);
   const [isModalOpen, setIsModalOpen] = useRecoilState<boolean>(modalState);
-  console.log(id);
 
   const onChangeLoginState = () => {
     if (isLoggedIn) {
@@ -42,10 +41,9 @@ const AnalysisHeader = ({ id }: Props) => {
 
   const onSaveBtnClick = () => {
     const userToken = "JWT " + localStorage.getItem("login-token")?.trim();
-    console.log(userToken);
     if (userToken !== null) {
       sendSaveRequeset(id, userToken);
-    } else console.log("동영상 저장 에러");
+    } else alert("동영상 저장 에러");
   };
 
   return (

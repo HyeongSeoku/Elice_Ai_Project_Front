@@ -33,8 +33,6 @@ const VideoAnalysis = () => {
 
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
 
-  console.log(state);
-
   //tag cloud color
   const cloudOptions = {
     luminosity: "ligt",
@@ -95,7 +93,7 @@ const VideoAnalysis = () => {
                 maxSize={25}
                 tags={tagCloudDate}
                 renderer={customRenderer}
-                // colorOptions={cloudOptions}
+                colorOptions={cloudOptions}
               />
             </div>
           </div>

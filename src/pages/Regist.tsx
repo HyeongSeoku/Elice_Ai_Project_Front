@@ -64,7 +64,6 @@ const Regist = () => {
       }
     }
     if (!isPassword(pwd)) {
-      console.log(isPassword(pwd));
       if (pwd.length < PWD_MIN_LENGTH || pwd.length > PWD_MAX_LENGTH) {
         alert(`비밀번호는 ${PWD_MIN_LENGTH}~${PWD_MAX_LENGTH}로 설정해주세요.`);
       } else {
@@ -89,7 +88,6 @@ const Regist = () => {
   const sendRequestRegist = async (data: any) => {
     try {
       await commonApi.send_regist(data).then((response: any) => {
-        console.log(response);
         if (response?.status === 201) {
           alert("회원가입 성공");
           setId("");
@@ -103,7 +101,7 @@ const Regist = () => {
         }
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

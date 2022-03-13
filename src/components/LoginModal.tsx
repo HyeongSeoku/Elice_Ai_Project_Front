@@ -59,8 +59,7 @@ const LoginModal = () => {
             localStorage.setItem("token-validity", response.data.refresh);
             onModalBtnClick(); //모달 닫기
           } else {
-            console.log(response.error);
-            console.error("에러발생");
+            console.error(response.error);
           }
         });
     } catch (e) {
@@ -71,7 +70,7 @@ const LoginModal = () => {
         return;
       }
       setIsLoggedIn(false);
-      console.log(e);
+      console.error(e);
     }
   };
 
