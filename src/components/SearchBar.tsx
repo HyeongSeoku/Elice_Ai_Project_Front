@@ -52,7 +52,13 @@ const SearchBar = ({
         return;
       }
       if (videoId === 502) {
-        alert("응답이 너무 오래걸립니다. 다시 시도해주세요.");
+        alert("Bad GateWay.");
+        onChangeLoadingState();
+        setSearchWord("");
+        return;
+      }
+      if (videoId === 504) {
+        alert("시간이 너무 오래 걸립니다. 다시 시도해주세요.");
         onChangeLoadingState();
         setSearchWord("");
         return;
