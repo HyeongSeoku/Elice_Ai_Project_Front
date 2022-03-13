@@ -81,8 +81,8 @@ const VideoAnalysis = () => {
             </div>
             <div className="bg-slate-300 rounded-md box-border p-2 h-32">
               <TagCloud
-                minSize={10}
-                maxSize={25}
+                minSize={15}
+                maxSize={35}
                 tags={tagCloudDate}
                 colorOptions={cloudOptions}
               />
