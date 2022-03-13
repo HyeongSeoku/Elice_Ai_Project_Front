@@ -37,7 +37,7 @@ const VideoAnalysis = () => {
 
   //tag cloud color
   const cloudOptions = {
-    luminosity: "light",
+    luminosity: "ligt",
     hue: "blue",
   };
 
@@ -60,6 +60,14 @@ const VideoAnalysis = () => {
     });
   });
 
+  const customRenderer = (tag: any, size: any, color: any) => {
+    return (
+      <span key={tag.value} style={{ color }} className={`tag-${size}`}>
+        {tag.value}
+      </span>
+    );
+  };
+
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll">
       <header style={{ height: "10%" }}>
@@ -67,12 +75,12 @@ const VideoAnalysis = () => {
       </header>
       <section className="flex flex-col items-center justify-center w-full h-full overflow-auto">
         <div className="flex flex-col w-full laptop:flex-row laptop:w-3/4 h-full mt-2 mb-2  ">
-          <div className="flex flex-col flex-grow  box-border p-2 bg-slate-200 rounded-md mr-1">
+          <div className="flex flex-col flex-grow  box-border p-2 bg-slate-200 rounded-md mr-1 laptop:w-1/2">
             <div
               className=" box-border p-2"
               style={{ width: "100%", height: "100%" }}
             >
-              <div className="text-4xl font-bold mb-5">자주 등장한 단어</div>
+              <div className="text-3xl font-bold mb-5">자주 등장한 단어</div>
               <div className="flex flex-row w-full h-full">
                 {analysisData.keywords_frequency.map((item, idx) => {
                   if (idx < 3) {
@@ -81,12 +89,13 @@ const VideoAnalysis = () => {
                 })}
               </div>
             </div>
-            <div className="bg-slate-300 rounded-md box-border p-2">
+            <div className="bg-slate-300 rounded-md box-border p-2 h-32">
               <TagCloud
-                minSize={12}
-                maxSize={35}
+                minSize={10}
+                maxSize={25}
                 tags={tagCloudDate}
-                colorOptions={cloudOptions}
+                renderer={customRenderer}
+                // colorOptions={cloudOptions}
               />
             </div>
           </div>

@@ -63,6 +63,14 @@ const SearchBar = ({
         setSearchWord("");
         return;
       }
+      if (videoId === 500) {
+        alert(
+          "영상의 시간이 너무 깁니다. 총 길이가 1시간 이하의 영상을 요청해주세요"
+        );
+        onChangeLoadingState();
+        setSearchWord("");
+        return;
+      }
 
       const videoDetail = await getDetailInfoVideo(videoId);
 
