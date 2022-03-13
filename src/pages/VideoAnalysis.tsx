@@ -58,14 +58,6 @@ const VideoAnalysis = () => {
     });
   });
 
-  const customRenderer = (tag: any, size: any, color: any) => {
-    return (
-      <span key={tag.value} style={{ color }} className={`tag-${size}`}>
-        {tag.value}
-      </span>
-    );
-  };
-
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center mx-auto p-5 box-border; overflow-scroll">
       <header style={{ height: "10%" }}>
@@ -92,7 +84,6 @@ const VideoAnalysis = () => {
                 minSize={10}
                 maxSize={25}
                 tags={tagCloudDate}
-                renderer={customRenderer}
                 colorOptions={cloudOptions}
               />
             </div>
