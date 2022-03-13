@@ -11,10 +11,6 @@
   height: 100vh;
 }
 
-.overflow-scroll {
-  overflow: hidden;
-}
-
 #myLogo {
   margin-bottom: 40px;
 }
@@ -35,4 +31,8 @@
 
 #time-script{
   overflow: scroll;
+}
+
+#hidden-scroll-page{
+  overflow: hidden;
 }

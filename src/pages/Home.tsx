@@ -66,7 +66,7 @@ const Home = () => {
   };
 
   return (
-    <div className="mx-auto p-5  overflow-scroll box-border" style={ {padding: 0} }>
+    <div id="hidden-scroll-page" className="mx-auto p-5  overflow-scroll box-border" style={ {padding: 0} }>
       <HeaderMenu />
       <section
         className="flex flex-col justify-center items-center mx-auto p-5  overflow-hidden"
