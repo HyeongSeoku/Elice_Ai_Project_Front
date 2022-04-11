@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# 중요해씨_프론트엔드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+프로젝트 구성 안내
 
-## Available Scripts
+# 데모 페이지
+[중요해시](http://ec2-54-180-103-214.ap-northeast-2.compute.amazonaws.com/)
 
-In the project directory, you can run:
+## 1. 프론트엔드 팀원
 
-### `npm start`
+|팀원|직책|
+|---|---|
+|김형석|프론트엔드,팀장|
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 2. 작업 내용
 
-### `npm test`
+기획 단계: 구체적인 설계와 지표에 따른 프로젝트 제안서 작성, 피그마를 이용한 와이어 프레임 작업
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+개발 단계: 효율적인 작업을 위한 프론트엔드 전반적인 사용자의 편의를 위한 화면 구성 , 백엔드와의 효과적인 데이터 교환 
 
-### `npm run build`
+수정 단계: 코드의 가독성 및 효과적인 로직을 위해 리팩토링 , 프론트엔드 배포
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 3. 사용 기술
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 주요 기술
 
-### `npm run eject`
+- React
+- TypeScript
+- Axios
+- recoil
+- AWS
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### CSS
+- Tailwind CSS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 차트 관련 라이브러리
+- recharts
+- react tagCloud
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 서버
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Nginx
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. 프로젝트 설치 및 실행 
+1. git clone https://github.com/HyeongSeoku/Elice_Ai_Project_Front.git
+2. npm install
+3. npm start
