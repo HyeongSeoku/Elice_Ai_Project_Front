@@ -3,7 +3,7 @@
 프로젝트 구성 안내
 
 # 데모 페이지
-[중요해시](http://ec2-54-180-103-214.ap-northeast-2.compute.amazonaws.com/)
+[중요해시](http://ec2-13-209-70-229.ap-northeast-2.compute.amazonaws.com/)
 
 ## 1. 프론트엔드 팀원
 
